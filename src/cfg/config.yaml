@@ -3,12 +3,25 @@ database:
 
 features:
   part1:
-    target: "Temperature Sensor (°C)"
+    target: "Temperature Sensor"
+    enc_list:
+      - "Plant Stage"
+    corr_threshold: 0.1
   part2:
-    target_list:
+    target_list: # Accepts 2 items as input in list
     - "Plant Type"
     - "Plant Stage"
     target_comb: "Plant Type-Stage"
+    corr_threshold: 0.095
+  low_case_list:
+    - "Plant Type"
+    - "Plant Stage"
+  nutrient_list:
+    - "Nutrient N Sensor (ppm)"
+    - "Nutrient P Sensor (ppm)"
+    - "Nutrient K Sensor (ppm)"
+  drop_list:
+    - "Humidity Sensor (%)"
 
 model:
   test_size: 0.2                    # Decimal value to determine test/train data set splitting metric
