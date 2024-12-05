@@ -26,6 +26,7 @@ def model_selection(
     model_param_dict: Dict,
     model_search_method: str,
     task_type: str,
+    col_name: str,
 ):
     # Define models and hyper-parameters
     model_dict = {}
@@ -49,7 +50,7 @@ def model_selection(
     ## Loop through each model
     for model_name, mp in model_dict.items():
         model_start_time = time.time()
-        print(f"Processing {model_name} now...")
+        print(f"Processing {model_name} now for {col_name}...")
         ### Create pipeline with preprocessing and model
         pipeline = Pipeline(steps=[("model", mp["model"])])
 
@@ -78,12 +79,14 @@ def model_selection(
 
         ### Save best model and use parameters for model evaluation
         best_estimators_dict[model_name] = search.best_estimator_
-        print(f"Best parameters for {model_name}: {search.best_params_}")
+        print(f"Best parameters for {model_name} - {col_name}: {search.best_params_}")
 
         model_end_time = time.time()
         model_total_time = model_end_time - model_start_time
         model_duration, model_tag = duration_cal.duration_cal(model_total_time)
-        print(f"{model_name} has run tuning for {model_duration:.3f} {model_tag}!")
+        print(
+            f"{model_name} - {col_name} has run tuning for {model_duration:.3f} {model_tag}!"
+        )
         print()
 
     return best_estimators_dict

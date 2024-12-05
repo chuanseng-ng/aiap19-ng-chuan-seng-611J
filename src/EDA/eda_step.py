@@ -68,6 +68,8 @@ def ml_eda_step(
         part2_X_test_list,
         part2_Y_train_list,
         part2_Y_test_list,
+        part2_col_list,
+        part2_lab_map,
     ) = part2_eda(
         part2_farm_data_df,
         part2_target_comb,
@@ -90,6 +92,8 @@ def ml_eda_step(
         part2_X_test_list,
         part2_Y_train_list,
         part2_Y_test_list,
+        part2_col_list,
+        part2_lab_map,
     )
 
 
@@ -111,7 +115,7 @@ def part1_eda(
         data_df[col_name] = data_df[col_name].fillna(data_df[col_name].median())
 
     ## Perform feature engineering (Label encoding and one-hot encoding)
-    feat_farm_data_df = eda_addon.feat_eng(
+    feat_farm_data_df, _ = eda_addon.feat_eng(
         data_df,
         data_df_col_list,
         1,  # part_num
@@ -168,7 +172,7 @@ def part2_eda(
         data_df[col_name] = data_df[col_name].fillna(data_df[col_name].median())
 
     ## Perform feature engineering (Label encoding and one-hot encoding)
-    feat_farm_data_df = eda_addon.feat_eng(
+    feat_farm_data_df, lab_map = eda_addon.feat_eng(
         data_df,
         data_df_col_list,
         2,  # part_num
@@ -214,4 +218,12 @@ def part2_eda(
         Y_train_list.append(Y_train)
         Y_test_list.append(Y_test)
 
-    return feat_farm_data_df_list, X_train_list, X_test_list, Y_train_list, Y_test_list
+    return (
+        feat_farm_data_df_list,
+        X_train_list,
+        X_test_list,
+        Y_train_list,
+        Y_test_list,
+        plant_typ_stg_col_list,
+        lab_map,
+    )

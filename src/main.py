@@ -66,6 +66,8 @@ print(f"{step_cnt}. Performing EDA on DataFrame....")
     part2_X_test_list,
     part2_Y_train_list,
     part2_Y_test_list,
+    part2_col_list,
+    part2_lab_map,
 ) = eda_step.ml_eda_step(
     farm_data_df,
     part1_target_col,
@@ -98,11 +100,17 @@ part1_best_estimator_dict = model_select.model_selection(
     part1_model_param_dict,
     model_search_method,
     "Regression",  # task_type
+    "",  # col_name
 )
 print("Regression done!")
 print("Starting with part 2 - Classification...")
 part2_best_estimator_dict_list = []
 for idx in range(len(part2_feat_farm_data_df_list)):
+    col_name_pattern = int(part2_col_list[idx].strip("Plant Type-Stage_"))
+    col_name_match_dict = {
+        key: value for key, value in part2_lab_map.items() if value == col_name_pattern
+    }
+    col_name_match = list(col_name_match_dict.keys())[0]
     tmp_part2_best_estimator_dict = model_select.model_selection(
         part2_X_train_list[idx],
         part2_Y_train_list[idx],
@@ -114,6 +122,7 @@ for idx in range(len(part2_feat_farm_data_df_list)):
         part2_model_param_dict,
         model_search_method,
         "Classification",  # task_type
+        col_name_match,
     )
 print("Classification done!")
 print("Training done!")
