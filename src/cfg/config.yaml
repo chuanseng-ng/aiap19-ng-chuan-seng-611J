@@ -35,7 +35,7 @@ model:
     task_type: "Regression"
     model_name_list:
       - "Linear Regression"
-      #- "Random Forest"
+      - "Random Forest"
       #- "SVR"
       #- "MLP"
       #- "Bayesian Ridge"
