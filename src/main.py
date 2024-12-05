@@ -6,6 +6,7 @@ import setup.setup as setup
 import setup.duration_cal as duration_cal
 
 start_time = time.time()
+step_cnt = 1  # Initialize step count
 
 (
     db_path,
@@ -25,6 +26,13 @@ start_time = time.time()
     part2_model_param_dict,
 ) = setup.setup_stage()
 
+# Create connection to SQL database
+print(f"{step_cnt}. Connecting to SQL database....")
+conn = sqlite3.connect(db_path)
+print("Connection done!")
+
+part1_time = duration_cal.duration_print(start_time, step_cnt)
+step_cnt = step_cnt + 1
 
 # Best model decision -
 ## If model variance is priority, look for highest R^2
