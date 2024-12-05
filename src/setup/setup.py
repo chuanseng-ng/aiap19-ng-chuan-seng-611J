@@ -50,19 +50,19 @@ def setup_stage():
         }
 
     if "MLP" in part1_model_name_list:
-        part1_model_param_dict["MLP Regression"] = {
+        part1_model_param_dict["MLP"] = {
             "model__hidden_layer_sizes": config["part1"]["mlp"][
                 "hidden_layer_sizes_list"
             ],
             "model__activation": config["part1"]["mlp"]["activation_list"],
             "model__solver": config["part1"]["mlp"]["solver_list"],
             "model__learning_rate": config["part1"]["mlp"]["learning_rate_list"],
-            "model_max_iter": config["part1"]["mlp"]["max_iter_list"],
+            "model__max_iter": config["part1"]["mlp"]["max_iter_list"],
         }
 
     if "Bayesian Ridge" in part1_model_name_list:
         part1_model_param_dict["Bayesian Ridge"] = {
-            "model__max_iter": config["part1"]["bayes"]["max_iter_list"],
+            "model__n_iter": config["part1"]["bayes"]["n_iter_list"],
             "model__alpha_1": config["part1"]["bayes"]["alpha_1_list"],
             "model__alpha_2": config["part1"]["bayes"]["alpha_2_list"],
             "model__lambda_1": config["part1"]["bayes"]["lambda_1_list"],
