@@ -32,6 +32,7 @@ model:
   num_iter: 50                      # Number of iterations for RandomSearchCV 
   num_jobs: 4                       # 0 to n -> Use n number of CPUs/Logical Processors, -1 -> Use all available resources
   part1:
+    task_type: "Regression"
     model_name_list:
       - "Linear Regression"
       - "Random Forest"
@@ -40,6 +41,7 @@ model:
       - "Bayesian Ridge"
       - "XGBoost"
   part2:
+    task_type: "Classification"
     model_name_list:
       - "Logistic Regression"
       - "Random Forest"
