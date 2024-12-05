@@ -31,8 +31,7 @@ print(f"{step_cnt}. Connecting to SQL database....")
 conn = sqlite3.connect(db_path)
 print("Connection done!")
 
-part1_time = duration_cal.duration_print(start_time, step_cnt)
-step_cnt = step_cnt + 1
+part1_time, step_cnt = duration_cal.duration_print(start_time, step_cnt)
 
 # Best model decision -
 ## If model variance is priority, look for highest R^2
