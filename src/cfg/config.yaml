@@ -1,5 +1,5 @@
 database:
-  path: "../../data/agri.db"
+  path: "../data/agri.db"
 
 features:
   part1:
@@ -95,22 +95,22 @@ part1:
       - 1000
       - 1200
       - 1500
-    alpha_1:
+    alpha_1_list:
       - 0.000001
       - 0.00001
       - 0.0001
       - 0.001
-    alpha_2:
+    alpha_2_list:
       - 0.000001
       - 0.00001
       - 0.0001
       - 0.001
-    lambda_1:
+    lambda_1_list:
       - 0.000001
       - 0.00001
       - 0.0001
       - 0.001
-    lambda_2:
+    lambda_2_list:
       - 0.000001
       - 0.00001
       - 0.0001
