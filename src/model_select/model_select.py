@@ -84,7 +84,6 @@ def model_selection(
         logger.info(
             f"Best parameters for {model_name} - {col_name}: {search.best_params_}"
         )
-        logger.info("--------------------------------------------")
 
         model_end_time = time.time()
         model_total_time = model_end_time - model_start_time
@@ -93,6 +92,10 @@ def model_selection(
             f"{model_name} - {col_name} has run tuning for {model_duration:.3f} {model_tag}!"
         )
         print()
+        logger.info(
+            f"{model_name} - {col_name} has run tuning for {model_duration:.3f} {model_tag}!"
+        )
+        logger.info("--------------------------------------------")
 
     return best_estimators_dict
 
@@ -113,7 +116,7 @@ def regression_model_param_det(model_param_dict, model_dict, model_random_state)
     if "MLP" in model_param_dict:
         model_dict["MLP"] = {
             "model": MLPRegressor(random_state=model_random_state),
-            "params": model_param_dict["MLP Regression"],
+            "params": model_param_dict["MLP"],
         }
     if "Bayesian Ridge" in model_param_dict:
         model_dict["Bayesian Ridge"] = {

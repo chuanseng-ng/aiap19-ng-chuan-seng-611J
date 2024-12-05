@@ -30,25 +30,25 @@ model:
   cv_num: 5                         # Number of cross-validation folds
   scoring: "neg_mean_squared_error" #
   num_iter: 50                      # Number of iterations for RandomSearchCV 
-  num_jobs: 4                       # 0 to n -> Use n number of CPUs/Logical Processors, -1 -> Use all available resources
+  num_jobs: -1                       # 0 to n -> Use n number of CPUs/Logical Processors, -1 -> Use all available resources
   part1:
     task_type: "Regression"
     model_name_list:
       - "Linear Regression"
       - "Random Forest"
-      #- "SVR"
-      #- "MLP"
-      #- "Bayesian Ridge"
-      #- "XGBoost"
+      - "SVR"
+      - "MLP"
+      - "Bayesian Ridge"
+      - "XGBoost"
   part2:
     task_type: "Classification"
     model_name_list:
       - "Logistic Regression"
-      #- "Random Forest"
-      #- "SVC"
-      #- "MLP"
-      #- "Naive Bayes"
-      #- "XGBoost"
+      - "Random Forest"
+      - "SVC"
+      - "MLP"
+      - "Naive Bayes"
+      - "XGBoost"
 
 part1:
   rand_forest:
@@ -104,7 +104,7 @@ part1:
       - 2000
 
   bayes:
-    max_iter_list:
+    n_iter_list:
       - 300
       - 500
       - 1000
