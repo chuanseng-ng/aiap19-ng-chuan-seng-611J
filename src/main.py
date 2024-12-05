@@ -171,3 +171,4 @@ final_duration, final_tag = duration_cal.duration_cal(final_time)
 
 print("Script has reached end of line - It will terminate now!")
 print(f"Script has run for {final_duration:.3f} {final_tag}!")
+print("Please refer to ml_model.log for model metric results!")
