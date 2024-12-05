@@ -9,8 +9,14 @@ def setup_stage():
     # Accessing configuration settings
     db_path = config["database"]["path"]
     part1_target_col = config["features"]["part1"]["target"]
+    part1_enc_col_list = config["features"]["part1"]["enc_list"]
+    part1_corr_thresh = config["features"]["part1"]["corr_threshold"]
     part2_target_list = config["features"]["part2"]["target_list"]
     part2_target_comb = config["features"]["part2"]["target_comb"]
+    part2_corr_thresh = config["features"]["part2"]["corr_threshold"]
+    low_case_col_list = config["features"]["low_case_list"]
+    nutrient_col_list = config["features"]["nutrient_list"]
+    drop_col_list = config["features"]["drop_list"]
 
     model_test_size = config["model"]["test_size"]
     model_random_state = config["model"]["random_state"]
@@ -120,8 +126,14 @@ def setup_stage():
     return (
         db_path,
         part1_target_col,
+        part1_enc_col_list,
+        part1_corr_thresh,
         part2_target_list,
         part2_target_comb,
+        part2_corr_thresh,
+        low_case_col_list,
+        nutrient_col_list,
+        drop_col_list,
         model_test_size,
         model_random_state,
         model_search_method,

@@ -18,10 +18,10 @@ def duration_cal(duration: float):
 
 # Print out runtime and return current time, takes in time value to offset
 def duration_print(input_time: float, step_cnt: int):
-    print(type(input_time))
     current_time = time.time()
     current_duration, current_tag = duration_cal(current_time - input_time)
     print(f"Part {step_cnt} has run for {current_duration:.3f} {current_tag}!")
     print()
+    step_cnt = step_cnt + 1
 
-    return current_time
+    return current_time, step_cnt
