@@ -6,6 +6,7 @@ import setup.setup as setup
 import setup.duration_cal as duration_cal
 import EDA.eda_step as eda_step
 import model_select.model_select as model_select
+import model_eval.model_eval as model_eval
 
 start_time = time.time()
 step_cnt = 1  # Initialize step count
@@ -127,9 +128,41 @@ for idx in range(len(part2_feat_farm_data_df_list)):
 print("Classification done!")
 print("Training done!")
 
-# Best model decision -
+part4_time, step_cnt = duration_cal.duration_print(part3_time, step_cnt)
+
+print("{step_cnt}. Evaluating machine learning model....")
+print("Starting with part 1 - Regression...")
+model_eval.model_evaluation(
+    part1_X_test, part1_Y_test, part1_best_estimator_dict, "Regression", ""
+)
+print("Regression done!")
+print("Starting with part 2 - Classification...")
+for idx in range(len(part2_feat_farm_data_df_list)):
+    col_name_pattern = int(part2_col_list[idx].strip("Plant Type-Stage_"))
+    col_name_match_dict = {
+        key: value for key, value in part2_lab_map.items() if value == col_name_pattern
+    }
+    col_name_match = list(col_name_match_dict.keys())[0]
+    model_eval.model_evaluation(
+        part2_X_test_list[idx],
+        part2_Y_test_list[idx],
+        part2_best_estimator_dict_list[idx],
+        "Classification",
+        col_name_match,
+    )
+print("Classification done!")
+print("Evaluation done!")
+
+part5_time, step_cnt = duration_cal.duration_print(part4_time, step_cnt)
+
+# Best regression model decision -
 ## If model variance is priority, look for highest R^2
 ## If predictive accuracy is priority, look for lowerst MSE (0 == Perfect model)
+
+# Best classification model decision -
+## If false positives are more costly, look for higher precision
+## If false negatives are more problematic, look for higher recall
+## Look for higher F1-score to determine how well model balances precision and recall
 
 end_time = time.time()
 final_time = end_time - start_time
