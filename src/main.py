@@ -125,6 +125,7 @@ for idx in range(len(part2_feat_farm_data_df_list)):
         "Classification",  # task_type
         col_name_match,
     )
+    part2_best_estimator_dict_list.append(tmp_part2_best_estimator_dict)
 print("Classification done!")
 print("Training done!")
 
