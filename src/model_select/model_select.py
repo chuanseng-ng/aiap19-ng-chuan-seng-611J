@@ -2,6 +2,7 @@ import pandas as pd
 import time
 
 import setup.duration_cal as duration_cal
+from log.log_setup import logger
 
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
@@ -80,6 +81,10 @@ def model_selection(
         ### Save best model and use parameters for model evaluation
         best_estimators_dict[model_name] = search.best_estimator_
         print(f"Best parameters for {model_name} - {col_name}: {search.best_params_}")
+        logger.info(
+            f"Best parameters for {model_name} - {col_name}: {search.best_params_}"
+        )
+        logger.info("--------------------------------------------")
 
         model_end_time = time.time()
         model_total_time = model_end_time - model_start_time

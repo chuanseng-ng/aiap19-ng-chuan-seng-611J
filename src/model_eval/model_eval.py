@@ -2,6 +2,7 @@ import pandas as pd
 import time
 
 import setup.duration_cal as duration_cal
+from log.log_setup import logger
 
 from sklearn.metrics import (
     mean_squared_error,
@@ -69,3 +70,4 @@ def model_evaluation(
     ## Display results
     results_df = pd.DataFrame(eval_result_dict).T
     print(results_df)
+    logger.info(results_df)
