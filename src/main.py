@@ -5,6 +5,7 @@ import time
 import setup.setup as setup
 import setup.duration_cal as duration_cal
 import EDA.eda_step as eda_step
+import model_select.model_select as model_select
 
 start_time = time.time()
 step_cnt = 1  # Initialize step count
@@ -29,6 +30,8 @@ step_cnt = 1  # Initialize step count
     model_num_jobs,
     part1_model_name_list,
     part2_model_name_list,
+    part1_model_task_type,
+    part2_model_task_type,
     part1_model_param_dict,
     part2_model_param_dict,
 ) = setup.setup_stage()
@@ -51,18 +54,20 @@ print("Extraction done!")
 part2_time, step_cnt = duration_cal.duration_print(part1_time, step_cnt)
 
 # Using analysis from task_1 EDA, perform data pre-processing and feature engineering
-print(f"{step_cnt}. Performing EDA on DataFrame...")
+print(f"{step_cnt}. Performing EDA on DataFrame....")
 (
-    part1_feat_farm_data_df,
+    part1_feat_farm_data_df,  # For part 1 regression task
     part1_X_train,
     part1_X_test,
     part1_Y_train,
     part1_Y_test,
-    part2_feat_farm_data_df_list,
+    part2_feat_farm_data_df_list,  # For part 2 classifier task
     part2_X_train_list,
     part2_X_test_list,
     part2_Y_train_list,
     part2_Y_test_list,
+    part2_col_list,
+    part2_lab_map,
 ) = eda_step.ml_eda_step(
     farm_data_df,
     part1_target_col,
@@ -78,6 +83,49 @@ print(f"{step_cnt}. Performing EDA on DataFrame...")
     model_random_state,
 )
 print("EDA done!")
+
+part3_time, step_cnt = duration_cal.duration_print(part2_time, step_cnt)
+
+# Pre-select a few models and train models to get best optimized parameters
+print(f"{step_cnt}. Training machine learning models....")
+print("Starting with part 1 - Regression...")
+part1_best_estimator_dict = model_select.model_selection(
+    part1_X_train,
+    part1_Y_train,
+    model_random_state,
+    model_num_jobs,
+    model_cv_num,
+    model_scoring,
+    model_num_iter,
+    part1_model_param_dict,
+    model_search_method,
+    "Regression",  # task_type
+    "",  # col_name
+)
+print("Regression done!")
+print("Starting with part 2 - Classification...")
+part2_best_estimator_dict_list = []
+for idx in range(len(part2_feat_farm_data_df_list)):
+    col_name_pattern = int(part2_col_list[idx].strip("Plant Type-Stage_"))
+    col_name_match_dict = {
+        key: value for key, value in part2_lab_map.items() if value == col_name_pattern
+    }
+    col_name_match = list(col_name_match_dict.keys())[0]
+    tmp_part2_best_estimator_dict = model_select.model_selection(
+        part2_X_train_list[idx],
+        part2_Y_train_list[idx],
+        model_random_state,
+        model_num_jobs,
+        model_cv_num,
+        model_scoring,
+        model_num_iter,
+        part2_model_param_dict,
+        model_search_method,
+        "Classification",  # task_type
+        col_name_match,
+    )
+print("Classification done!")
+print("Training done!")
 
 # Best model decision -
 ## If model variance is priority, look for highest R^2

@@ -13,6 +13,7 @@ def feat_eng(
     lab_enc = LabelEncoder()
     for col_name in lab_enc_list:
         data_df[col_name] = lab_enc.fit_transform(data_df[col_name])
+        lab_map = dict(zip(lab_enc.classes_, range(len(lab_enc.classes_))))
 
     # Perform one-hot encoding
     cat_col_list = data_df.select_dtypes(include=["object"]).columns.tolist()
@@ -31,7 +32,7 @@ def feat_eng(
     scaler = StandardScaler()
     data_df[num_col_list] = scaler.fit_transform(data_df[num_col_list])
 
-    return data_df
+    return data_df, lab_map
 
 
 def corr_eval(data_df: pd.DataFrame, target_col: str, corr_thresh: float):
