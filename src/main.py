@@ -2,9 +2,29 @@ import sqlite3
 import pandas as pd
 import time
 
+import setup.setup as setup
 import setup.duration_cal as duration_cal
 
 start_time = time.time()
+
+(
+    db_path,
+    part1_target_col,
+    part2_target_list,
+    part2_target_comb,
+    model_test_size,
+    model_random_state,
+    model_search_method,
+    model_cv_num,
+    model_scoring,
+    model_num_iter,
+    model_num_jobs,
+    part1_model_name_list,
+    part2_model_name_list,
+    part1_model_param_dict,
+    part2_model_param_dict,
+) = setup.setup_stage()
+
 
 # Best model decision -
 ## If model variance is priority, look for highest R^2
