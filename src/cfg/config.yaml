@@ -35,20 +35,20 @@ model:
     task_type: "Regression"
     model_name_list:
       - "Linear Regression"
-      - "Random Forest"
-      - "SVR"
-      - "MLP"
-      - "Bayesian Ridge"
-      - "XGBoost"
+      #- "Random Forest"
+      #- "SVR"
+      #- "MLP"
+      #- "Bayesian Ridge"
+      #- "XGBoost"
   part2:
     task_type: "Classification"
     model_name_list:
       - "Logistic Regression"
-      - "Random Forest"
-      - "SVC"
-      - "MLP"
-      - "Naive Bayes"
-      - "XGBoost"
+      #- "Random Forest"
+      #- "SVC"
+      #- "MLP"
+      #- "Naive Bayes"
+      #- "XGBoost"
 
 part1:
   rand_forest:
