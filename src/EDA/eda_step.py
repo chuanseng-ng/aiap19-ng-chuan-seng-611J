@@ -119,7 +119,7 @@ def part1_eda(
     )
 
     # Drop features that are below correlation threshold value
-    data_df = eda_addon.corr_eval(data_df, target_col, corr_thresh)
+    feat_farm_data_df = eda_addon.corr_eval(feat_farm_data_df, target_col, corr_thresh)
 
     (
         data_df,
@@ -128,14 +128,14 @@ def part1_eda(
         Y_train,
         Y_test,
     ) = eda_addon.model_prep(
-        data_df,
+        feat_farm_data_df,
         target_col,
         model_test_size,
         model_random_state,
         1,  # part_num
     )
 
-    return data_df, X_train, X_test, Y_train, Y_test
+    return feat_farm_data_df, X_train, X_test, Y_train, Y_test
 
 
 def part2_eda(
