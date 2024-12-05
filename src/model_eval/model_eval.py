@@ -37,6 +37,9 @@ def model_evaluation(
                 "Mean Squared Error": eval_mse,
                 "R2 Score": eval_r2,
             }
+            logger.info(f"{model_name} {col_name} evaluation - ")
+            logger.info(f"Mean Squared Error: {eval_mse}")
+            logger.info(f"R2 Score: {eval_r2}")
         elif task_type == "Classification":
             eval_confuse_matrix = confusion_matrix(Y_test, Y_predict)
             eval_class_rpt = classification_report(Y_test, Y_predict)
@@ -45,6 +48,9 @@ def model_evaluation(
                 "Confusion Matrix": eval_confuse_matrix,
                 "Classification Report": eval_class_rpt,
             }
+            logger.info(f"{model_name} {col_name} evaluation - ")
+            logger.info(f"Confusion Matrix: \n{eval_confuse_matrix}")
+            logger.info(f"Classification Report: \n{eval_class_rpt}")
 
         model_end_time = time.time()
         model_total_time = model_end_time - model_start_time
@@ -70,4 +76,3 @@ def model_evaluation(
     ## Display results
     results_df = pd.DataFrame(eval_result_dict).T
     print(results_df)
-    logger.info(results_df)

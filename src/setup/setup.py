@@ -37,9 +37,9 @@ def setup_stage():
     if "Linear Regression" in part1_model_name_list:
         part1_model_param_dict["Linear Regression"] = {}
 
-    if "Random Forest" in part1_model_param_dict:
+    if "Random Forest" in part1_model_name_list:
         part1_model_param_dict["Random Forest"] = {
-            "model__n_estimator": config["part1"]["rand_forest"]["est_list"],
+            "model__n_estimators": config["part1"]["rand_forest"]["est_list"],
             "model__max_depth": config["part1"]["rand_forest"]["depth_list"],
         }
 
