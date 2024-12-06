@@ -6,19 +6,14 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 from imblearn.over_sampling import SMOTE
 
 
-def feat_eng(
-    data_df: pd.DataFrame, full_col_list: List, part_num: int, lab_enc_list=[]
-):
+def feat_eng(data_df: pd.DataFrame, full_col_list: List, lab_enc_list=[]):
     # Perform label encoding
     lab_enc = LabelEncoder()
     for col_name in lab_enc_list:
         data_df[col_name] = lab_enc.fit_transform(data_df[col_name])
-        lab_map = dict(zip(lab_enc.classes_, range(len(lab_enc.classes_))))
 
     # Perform one-hot encoding
     cat_col_list = data_df.select_dtypes(include=["object"]).columns.tolist()
-    if part_num == 2:
-        cat_col_list = cat_col_list + lab_enc_list
     data_df = pd.get_dummies(data_df, columns=cat_col_list, drop_first=True)
     bool_col = data_df.select_dtypes(include=["bool"]).columns
     data_df[bool_col] = data_df[bool_col].astype(int)
@@ -32,7 +27,7 @@ def feat_eng(
     scaler = StandardScaler()
     data_df[num_col_list] = scaler.fit_transform(data_df[num_col_list])
 
-    return data_df, lab_map
+    return data_df
 
 
 def corr_eval(data_df: pd.DataFrame, target_col: str, corr_thresh: float):
@@ -57,7 +52,6 @@ def model_prep(
     target_col: str,
     model_test_size: float,
     model_random_state: int,
-    part_num: int,
 ):
     # Split features (X) and target variable (Y)
     X = data_df.drop(columns=target_col)
@@ -68,10 +62,4 @@ def model_prep(
         X, Y, test_size=model_test_size, random_state=model_random_state
     )
 
-    if part_num == 2:
-        smote = SMOTE(sampling_strategy="auto", random_state=model_random_state)
-        resample_X_train, resample_Y_train = smote.fit_resample(X_train, Y_train)
-
-        return data_df, resample_X_train, X_test, resample_Y_train, Y_test
-    else:
-        return data_df, X_train, X_test, Y_train, Y_test
+    return data_df, X_train, X_test, Y_train, Y_test

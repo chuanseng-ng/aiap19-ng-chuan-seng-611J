@@ -40,6 +40,7 @@ model:
       - "MLP"
       - "Bayesian Ridge"
       - "XGBoost"
+    save_model: True
   part2:
     task_type: "Classification"
     model_name_list:
@@ -49,6 +50,7 @@ model:
       - "MLP"
       - "Naive Bayes"
       - "XGBoost"
+    save_model: False
 
 part1:
   rand_forest:
@@ -190,10 +192,6 @@ part2:
       - 250
       - 275
       - 300
-      - 325
-      - 350
-      - 375
-      - 400
     depth_list:
       - 5
       - 10
@@ -201,8 +199,6 @@ part2:
       - 20
       - 25
       - 30
-      - 35
-      - 40
     class_weight_list:
       - "balanced"
       - {0: 1, 1: 1.7}

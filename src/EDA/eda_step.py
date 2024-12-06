@@ -63,13 +63,11 @@ def ml_eda_step(
     # Part 2 - Classification
     part2_farm_data_df = deepcopy(farm_data_df)
     (
-        part2_feat_farm_data_df_list,
-        part2_X_train_list,
-        part2_X_test_list,
-        part2_Y_train_list,
-        part2_Y_test_list,
-        part2_col_list,
-        part2_lab_map,
+        part2_feat_farm_data_df,
+        part2_X_train,
+        part2_X_test,
+        part2_Y_train,
+        part2_Y_test,
     ) = part2_eda(
         part2_farm_data_df,
         part2_target_comb,
@@ -87,13 +85,11 @@ def ml_eda_step(
         part1_X_test,
         part1_Y_train,
         part1_Y_test,
-        part2_feat_farm_data_df_list,
-        part2_X_train_list,
-        part2_X_test_list,
-        part2_Y_train_list,
-        part2_Y_test_list,
-        part2_col_list,
-        part2_lab_map,
+        part2_feat_farm_data_df,
+        part2_X_train,
+        part2_X_test,
+        part2_Y_train,
+        part2_Y_test,
     )
 
 
@@ -107,18 +103,19 @@ def part1_eda(
     model_random_state,
 ):
     ## As analyzed in the Task 1's EDA, rows with missing value in 'Temperature Sensor' should be dropped
-    data_df[target_col] = data_df[target_col].dropna()
+    # data_df[target_col] = data_df[target_col].dropna()
 
-    ## Other columns should replace missing value with their median value
-    nan_col_list = data_df.columns[data_df.isnull().any()].tolist()
-    for col_name in nan_col_list:
-        data_df[col_name] = data_df[col_name].fillna(data_df[col_name].median())
+    ### Other columns should replace missing value with their median value (Scrapped)
+    # nan_col_list = data_df.columns[data_df.isnull().any()].tolist()
+    # for col_name in nan_col_list:
+    #    data_df[col_name] = data_df[col_name].fillna(data_df[col_name].median())
+    ## Drop all rows with missing values
+    data_df = data_df.dropna().reset_index()
 
     ## Perform feature engineering (Label encoding and one-hot encoding)
-    feat_farm_data_df, _ = eda_addon.feat_eng(
+    feat_farm_data_df = eda_addon.feat_eng(
         data_df,
         data_df_col_list,
-        1,  # part_num
         enc_col_list,
     )
 
@@ -136,7 +133,6 @@ def part1_eda(
         target_col,
         model_test_size,
         model_random_state,
-        1,  # part_num
     )
 
     return feat_farm_data_df, X_train, X_test, Y_train, Y_test
@@ -161,69 +157,38 @@ def part2_eda(
         col_name for col_name in data_df_col_list if col_name not in target_list
     ]
 
-    ## Replace 'Temperature Sensor' column missing values with mean
-    data_df[temp_col_name] = data_df[temp_col_name].fillna(
-        data_df[temp_col_name].mean()
-    )
+    ### Replace 'Temperature Sensor' column missing values with mean
+    # data_df[temp_col_name] = data_df[temp_col_name].fillna(
+    #    data_df[temp_col_name].mean()
+    # )
 
-    ## Other columns should replace missing value with their median value
-    nan_col_list = data_df.columns[data_df.isnull().any()].tolist()
-    for col_name in nan_col_list:
-        data_df[col_name] = data_df[col_name].fillna(data_df[col_name].median())
+    ### Other columns should replace missing value with their median value (Scrapped)
+    # nan_col_list = data_df.columns[data_df.isnull().any()].tolist()
+    # for col_name in nan_col_list:
+    #    data_df[col_name] = data_df[col_name].fillna(data_df[col_name].median())
+    ## Drop all rows with missing values
+    data_df = data_df.dropna().reset_index()
 
     ## Perform feature engineering (Label encoding and one-hot encoding)
-    feat_farm_data_df, lab_map = eda_addon.feat_eng(
+    feat_farm_data_df = eda_addon.feat_eng(
         data_df,
         data_df_col_list,
-        2,  # part_num
         [target_col],
     )
 
-    plant_typ_stg_col_list = [
-        col_name
-        for col_name in feat_farm_data_df.columns
-        if "Plant Type-Stage" in col_name
-    ]
+    feat_farm_data_df = eda_addon.corr_eval(feat_farm_data_df, target_col, corr_thresh)
 
-    feat_farm_data_df_list = []
-
-    for col_name in plant_typ_stg_col_list:
-        tmp_feat_farm_data_df = eda_addon.corr_eval(
-            feat_farm_data_df, col_name, corr_thresh
-        )
-        feat_farm_data_df_list.append(tmp_feat_farm_data_df)
-
-    X_train_list = []
-    X_test_list = []
-    Y_train_list = []
-    Y_test_list = []
-
-    for idx in range(len(plant_typ_stg_col_list)):
-        (
-            feat_farm_data_df,
-            X_train,
-            X_test,
-            Y_train,
-            Y_test,
-        ) = eda_addon.model_prep(
-            feat_farm_data_df_list[idx],
-            plant_typ_stg_col_list[idx],
-            model_test_size,
-            model_random_state,
-            2,  # part_num
-        )
-
-        X_train_list.append(X_train)
-        X_test_list.append(X_test)
-        Y_train_list.append(Y_train)
-        Y_test_list.append(Y_test)
-
-    return (
-        feat_farm_data_df_list,
-        X_train_list,
-        X_test_list,
-        Y_train_list,
-        Y_test_list,
-        plant_typ_stg_col_list,
-        lab_map,
+    (
+        feat_farm_data_df,
+        X_train,
+        X_test,
+        Y_train,
+        Y_test,
+    ) = eda_addon.model_prep(
+        feat_farm_data_df,
+        target_col,
+        model_test_size,
+        model_random_state,
     )
+
+    return feat_farm_data_df, X_train, X_test, Y_train, Y_test
