@@ -21,14 +21,13 @@ def model_evaluation(
     best_estimator_dict: Dict,
     model_save: bool,
     task_type: str,
-    col_name: str,
 ):
     ## Initialize dictionary to store results
     eval_result_dict = {}
 
     for model_name, model in best_estimator_dict.items():
         model_start_time = time.time()
-        print(f"Evaluating {model_name} {col_name} now...")
+        print(f"Evaluating {model_name} now...")
         ### Predict on test set
         Y_predict = model.predict(X_test)
         ### Calculate evaluation metrics
@@ -40,7 +39,7 @@ def model_evaluation(
                 "Mean Squared Error": eval_mse,
                 "R2 Score": eval_r2,
             }
-            logger.info(f"{model_name} {col_name} evaluation - ")
+            logger.info(f"{model_name} evaluation - ")
             logger.info(f"Mean Squared Error: {eval_mse}")
             logger.info(f"R2 Score: {eval_r2}")
         elif task_type == "Classification":
@@ -51,16 +50,14 @@ def model_evaluation(
                 "Confusion Matrix": eval_confuse_matrix,
                 "Classification Report": eval_class_rpt,
             }
-            logger.info(f"{model_name} {col_name} evaluation - ")
+            logger.info(f"{model_name} evaluation - ")
             logger.info(f"Confusion Matrix: \n{eval_confuse_matrix}")
             logger.info(f"Classification Report: \n{eval_class_rpt}")
 
         model_end_time = time.time()
         model_total_time = model_end_time - model_start_time
         model_duration, model_tag = duration_cal.duration_cal(model_total_time)
-        print(
-            f"{model_name} {col_name} has run evaluation for {model_duration:.3f} {model_tag}!"
-        )
+        print(f"{model_name} has run evaluation for {model_duration:.3f} {model_tag}!")
 
         if model_save:
             model_save_path = "./model_saved"
@@ -68,9 +65,7 @@ def model_evaluation(
             if not os.path.exists(model_save_path):
                 os.makedirs(model_save_path)
 
-            if not (col_name):
-                col_name = "Regression"
-            model_save_name = f"{model_save_path}/{model_name}-{col_name}.pkl"
+            model_save_name = f"{model_save_path}/{model_name}.pkl"
             joblib.dump(model, model_save_name)
             print(f"Model has been saved as {model_save_name}!")
             print()
