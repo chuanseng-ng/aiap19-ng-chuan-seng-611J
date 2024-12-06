@@ -106,7 +106,7 @@ part1:
       - 2000
 
   bayes:
-    n_iter_list:
+    max_iter_list:
       - 300
       - 500
       - 1000

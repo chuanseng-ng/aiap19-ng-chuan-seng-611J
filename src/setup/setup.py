@@ -75,7 +75,7 @@ def setup_stage():
 
         if "Bayesian Ridge" in part1_model_name_list:
             part1_model_param_dict["Bayesian Ridge"] = {
-                "model__n_iter": config["part1"]["bayes"]["n_iter_list"],
+                "model__max_iter": config["part1"]["bayes"]["max_iter_list"],
                 "model__alpha_1": config["part1"]["bayes"]["alpha_1_list"],
                 "model__alpha_2": config["part1"]["bayes"]["alpha_2_list"],
                 "model__lambda_1": config["part1"]["bayes"]["lambda_1_list"],
