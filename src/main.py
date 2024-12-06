@@ -33,6 +33,8 @@ step_cnt = 1  # Initialize step count
     part2_model_name_list,
     part1_model_task_type,
     part2_model_task_type,
+    part1_model_save_model,
+    part2_model_save_model,
     part1_model_param_dict,
     part2_model_param_dict,
 ) = setup.setup_stage()
@@ -134,7 +136,12 @@ part4_time, step_cnt = duration_cal.duration_print(part3_time, step_cnt)
 print("{step_cnt}. Evaluating machine learning model....")
 print("Starting with part 1 - Regression...")
 model_eval.model_evaluation(
-    part1_X_test, part1_Y_test, part1_best_estimator_dict, "Regression", ""
+    part1_X_test,
+    part1_Y_test,
+    part1_best_estimator_dict,
+    part1_model_save_model,
+    "Regression",
+    "",
 )
 print("Regression done!")
 print("Starting with part 2 - Classification...")
@@ -148,6 +155,7 @@ for idx in range(len(part2_feat_farm_data_df_list)):
         part2_X_test_list[idx],
         part2_Y_test_list[idx],
         part2_best_estimator_dict_list[idx],
+        part2_model_save_model,
         "Classification",
         col_name_match,
     )
