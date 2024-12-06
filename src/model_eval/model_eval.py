@@ -1,5 +1,7 @@
 import pandas as pd
+import joblib
 import time
+import os
 
 import setup.duration_cal as duration_cal
 from log.log_setup import logger
@@ -17,6 +19,7 @@ def model_evaluation(
     X_test: pd.DataFrame,
     Y_test: pd.DataFrame,
     best_estimator_dict: Dict,
+    model_save: bool,
     task_type: str,
     col_name: str,
 ):
@@ -58,7 +61,21 @@ def model_evaluation(
         print(
             f"{model_name} {col_name} has run evaluation for {model_duration:.3f} {model_tag}!"
         )
-        print()
+
+        if model_save:
+            model_save_path = "./model_saved"
+
+            if not os.path.exists(model_save_path):
+                os.makedirs(model_save_path)
+
+            if not (col_name):
+                col_name = "Regression"
+            model_save_name = f"{model_save_path}/{model_name}-{col_name}.pkl"
+            joblib.dump(model, model_save_name)
+            print(f"Model has been saved as {model_save_name}!")
+            print()
+        else:
+            print()
 
     ## Info -
     ### Accuracy - Measures overall percentage of correct predictions
