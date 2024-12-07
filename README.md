@@ -108,6 +108,7 @@ flowchart TD
 | EC Sensor | - | Standardized Scaling |
 | O2 Sensor | - | Standardized Scaling |
 | pH Sensor | - | Standardized Scaling |
+<br>
 
 ### Part 2 Classification
 | Feature | Processing | Feature Engineering |
