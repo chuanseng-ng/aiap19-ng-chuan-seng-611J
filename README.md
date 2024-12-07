@@ -138,12 +138,33 @@ flowchart TD
 ## Model Choice
 - Regression
     - Linear Regression
+        - Used as a starting-point (Base-line model)
+        - Easily interpretable - Can easily see how each feature affects the target variable (Temperature Sensor)
+        - Test data set on linear relationship between target variable and other features
+        - Computationally efficient in terms of resource usage
     - Random Forest Regressor
+        - Combines multiple decision trees to capture complex, non-linear relationship in the data
+        - Less prone to overfitting
+        - Automatically handles feature interaction without needing to manually create interaction terms 
     - XGBoost Regressor
+        - High predictive power - XGBoost is an advanced gradient boosting algorithm
+        - Handles non-linearity and feature interaction - Similar to Random Forest Regressor
+        - Built-in regularization to prevent overfitting when dealing with noisy or complex datasets
+        - Wide range of hyper-parameters to tune - Allowing for further performance optimization
 - Classification
     - Logistic Regression
+        - Used as a starting-point (Base-line model)
+        - Easily interpretable - Can easily see how each feature affects the target variable (Plant Type-Stage)
+        - Can be used for multi-class classification
     - Random Forest Classifier
+        - Combines multiple decision trees to capture complex, non-linear relationship in the data
+        - Robustness to overfitting
+        - Handles numerical and categorical features well without needing for extensive preprocessing
     - XGBoost Classifier
+        - High predictive power - XGBoost is an advanced gradient boosting algorithm
+        - Optimized for speed and efficiency - Can handle missing data, categorical variables, and outliers
+        - Built-in regularization to prevent overfitting when dealing with noisy or complex datasets
+        - Wide range of hyper-parameters to tune - Allowing for further performance optimization
 
 ## Model Evaluation
 - Regression
@@ -156,5 +177,9 @@ flowchart TD
     - XGBoost Classifier
 
 ## Other Considerations
-- Regression
+- Regression:
+    - Model run-time
+    - Number of model parameters defined
 - Classification
+    - Model run-time
+    - Number of model parameters defined
