@@ -1,26 +1,26 @@
 database:
-  path: "../data/agri.db"
+  path: "../data/agri.db"           # SQL DataBase path (relative/absolute path is ok)
 
 features:
-  part1:
-    target: "Temperature Sensor"
-    enc_list:
+  part1:                            # Part 1 (Regression)
+    target: "Temperature Sensor"    # Target variable column name
+    enc_list:                       # List of column names for label encoding
       - "Plant Stage"
-    corr_threshold: 0.1
-  part2:
-    target_list: # Accepts 2 items as input in list
+    corr_threshold: 0.1             # Correlation threshold value
+  part2:                            # Part 2 (Classification)
+    target_list:                    # Accepts 2 items as input in list to combine into new column
     - "Plant Type"
     - "Plant Stage"
-    target_comb: "Plant Type-Stage"
-    corr_threshold: 0.095
-  low_case_list:
+    target_comb: "Plant Type-Stage" # Combined variable column name - Used as target variable column name
+    corr_threshold: 0.095           # Correlation threshold value
+  low_case_list:                    # List of column names to convert data to lower-case
     - "Plant Type"
     - "Plant Stage"
-  nutrient_list:
+  nutrient_list:                    # List of column names for 'Nutrient * Sensor'
     - "Nutrient N Sensor (ppm)"
     - "Nutrient P Sensor (ppm)"
     - "Nutrient K Sensor (ppm)"
-  drop_list:
+  drop_list:                        # List of column names to drop column
     - "Humidity Sensor (%)"
 
 model:
@@ -28,11 +28,11 @@ model:
   random_state: 42                  # Random seed value
   search_method: "grid"             # Valid values are "grid/random"
   cv_num: 5                         # Number of cross-validation folds
-  scoring: "neg_mean_squared_error" #
   num_iter: 50                      # Number of iterations for RandomSearchCV 
   num_jobs: -1                       # 0 to n -> Use n number of CPUs/Logical Processors, -1 -> Use all available resources
   part1:
     task_type: "Regression"
+    scoring: "neg_mean_squared_error"
     model_name_list:
       - "Linear Regression"
       - "Random Forest"
@@ -43,6 +43,7 @@ model:
     save_model: True
   part2:
     task_type: "Classification"
+    scoring: "accuracy"
     model_name_list:
       - "Logistic Regression"
       - "Random Forest"
