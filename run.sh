@@ -6,4 +6,4 @@ echo "Move done!"
 echo ""
 echo "Will now execute main.py"
 python main.py
-echo "Task 2 script execution is completed!\n"
+echo "Task 2 script execution is completed!"
