@@ -22,13 +22,14 @@ def setup_stage():
     model_random_state = config["model"]["random_state"]
     model_search_method = config["model"]["search_method"]
     model_cv_num = config["model"]["cv_num"]
-    model_scoring = config["model"]["scoring"]
     model_num_iter = config["model"]["num_iter"]
     model_num_jobs = config["model"]["num_jobs"]
     part1_model_name_list = config["model"]["part1"]["model_name_list"]
     part2_model_name_list = config["model"]["part2"]["model_name_list"]
     part1_model_task_type = config["model"]["part1"]["task_type"]
     part2_model_task_type = config["model"]["part2"]["task_type"]
+    part1_model_scoring = config["model"]["part1"]["scoring"]
+    part2_model_scoring = config["model"]["part2"]["scoring"]
     part1_model_save_model = config["model"]["part1"]["save_model"]
     part2_model_save_model = config["model"]["part2"]["save_model"]
 
@@ -154,13 +155,14 @@ def setup_stage():
         model_random_state,
         model_search_method,
         model_cv_num,
-        model_scoring,
         model_num_iter,
         model_num_jobs,
         part1_model_name_list,
         part2_model_name_list,
         part1_model_task_type,
         part2_model_task_type,
+        part1_model_scoring,
+        part2_model_scoring,
         part1_model_save_model,
         part2_model_save_model,
         part1_model_param_dict,
