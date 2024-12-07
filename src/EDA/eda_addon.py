@@ -3,7 +3,6 @@ import pandas as pd
 from typing import List
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
-from imblearn.over_sampling import SMOTE
 
 
 def feat_eng(data_df: pd.DataFrame, full_col_list: List, lab_enc_list=[]):
