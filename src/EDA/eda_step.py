@@ -71,7 +71,6 @@ def ml_eda_step(
     ) = part2_eda(
         part2_farm_data_df,
         part2_target_comb,
-        part1_target_col,
         part2_target_list,
         farm_data_df_col_list,
         part2_corr_thresh,
@@ -102,13 +101,6 @@ def part1_eda(
     model_test_size,
     model_random_state,
 ):
-    ## As analyzed in the Task 1's EDA, rows with missing value in 'Temperature Sensor' should be dropped
-    # data_df[target_col] = data_df[target_col].dropna()
-
-    ### Other columns should replace missing value with their median value (Scrapped)
-    # nan_col_list = data_df.columns[data_df.isnull().any()].tolist()
-    # for col_name in nan_col_list:
-    #    data_df[col_name] = data_df[col_name].fillna(data_df[col_name].median())
     ## Drop all rows with missing values
     data_df = data_df.dropna().reset_index()
 
@@ -141,7 +133,6 @@ def part1_eda(
 def part2_eda(
     data_df: pd.DataFrame,
     target_col: str,
-    temp_col_name: str,
     target_list: List,
     data_df_col_list: List,
     corr_thresh: float,
@@ -157,15 +148,6 @@ def part2_eda(
         col_name for col_name in data_df_col_list if col_name not in target_list
     ]
 
-    ### Replace 'Temperature Sensor' column missing values with mean
-    # data_df[temp_col_name] = data_df[temp_col_name].fillna(
-    #    data_df[temp_col_name].mean()
-    # )
-
-    ### Other columns should replace missing value with their median value (Scrapped)
-    # nan_col_list = data_df.columns[data_df.isnull().any()].tolist()
-    # for col_name in nan_col_list:
-    #    data_df[col_name] = data_df[col_name].fillna(data_df[col_name].median())
     ## Drop all rows with missing values
     data_df = data_df.dropna().reset_index()
 
