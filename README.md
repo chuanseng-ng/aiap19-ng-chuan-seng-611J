@@ -161,26 +161,26 @@ flowchart TD
         - Combines multiple decision trees to capture complex, non-linear relationship in the data
         - Robustness to overfitting
         - Handles numerical and categorical features well without needing for extensive preprocessing
-    - MLP (Multi-Layer Perceptron) Classifier
+    - Multi-Layer Perceptron (MLP) Classifier
         - Can learn complex non-linear relationships between features and target
         - Flexible model that can be adapted to different types of classification problems (Binary or multi-class)
         - Can be configured with various numbers of hidden layers and neurons
 
 ## Model Evaluation
-- Regression
-    - Metrics used
-        - Mean Squared Error
-            - Used when minimizing prediction error is of importance
-            - Provides indication of how well model is fitting to data
-            - More sensitive to outliers and gives a sense of error magnitude
-            - Lower value = Better model predictive accuracy
-        - R2 Score
-            - Used to understand how well model is explaining variance in data (Variance = Variability/spread of target variable)
-            - Determine how well model captures underlying patterns in data
-            - Might not be accurate if model is overfitting or contains outliers
-            - Higher value = Higher percentage of variance is explained by model
-    - Since this regression is to predict the temperature value, prediction error is of importance
-    - Hence, mean squared error needs to be monitored, along with r2 score to ensure that the model is not overfitted
+### Regression
+- Metrics used
+    - Mean Squared Error
+        - Used when minimizing prediction error is of importance
+        - Provides indication of how well model is fitting to data
+        - More sensitive to outliers and gives a sense of error magnitude
+        - Lower value = Better model predictive accuracy
+    - R2 Score
+        - Used to understand how well model is explaining variance in data (Variance = Variability/spread of target variable)
+        - Determine how well model captures underlying patterns in data
+        - Might not be accurate if model is overfitting or contains outliers
+        - Higher value = Higher percentage of variance is explained by model
+- Since this regression is to predict the temperature value, prediction error is of importance
+- Hence, mean squared error needs to be monitored, along with r2 score to ensure that the model is not overfitted
 
 ### Regression Model Results
 | Model | Mean Squared Error | R2 Score |
@@ -188,19 +188,28 @@ flowchart TD
 | Linear Regression | 0.5126 | 0.4975 |
 | Random Forest Regressor | 0.3154 | 0.6908 |
 | XGBoost Regressor | 0.3381 | 0.6686 |
+
+### Regression Model Evaluation
+As seen in the table above, Linear Regression model has the largest Mean Squared Error (MSE) and smallest R2 Score values <br>
+This means that the relationship between target and features is not linear <br>
+As for the other two models, they have similar values for both MSE and R2 Score <br>
+However, Random Forest Regressor has a smaller MSE and larger R2 Score value than XGBoost Regressor <br>
+This could be due to a narrow range of hyperparameter values defined for XGBoost Regressor during the GridSearchCV step <br>
+This can be improved by increasing the range of hyperparameter values but this would also mean that the runtime would increase due to the increase in possible combinations <br>
+
 ---
 <br>
 
-- Classification
-    - Metrics used
-        - Confusion Matrix
-            - Helps to visualize performance of model by showing number of correct and incorrect predictions for each class
-            - Helps to identify errors (false positives and false negatives) and assess how well model is performing
-        - Classification Report
-            - Provides detailed performance evaluation of model by calculating precision, recall, f1-score, and support for each class
-            - Useful in situations where there are imabalanced classes or need to evaluate model's behaviour for each class
-    - The confusion matrix provides a quick overview of the model's classification results
-    - The classification report provides an overview of the performance of each target class
+### Classification
+- Metrics used
+    - Confusion Matrix
+        - Helps to visualize performance of model by showing number of correct and incorrect predictions for each class
+        - Helps to identify errors (false positives and false negatives) and assess how well model is performing
+    - Classification Report
+        - Provides detailed performance evaluation of model by calculating precision, recall, f1-score, and support for each class
+        - Useful in situations where there are imabalanced classes or need to evaluate model's behaviour for each class
+- The confusion matrix provides a quick overview of the model's classification results
+- The classification report provides an overview of the performance of each target class
 
 ### Classification Sub-metric Description
 | Metric | Description |
@@ -216,6 +225,15 @@ flowchart TD
 | Logistic Regression | 0.76 | 0.75 | 0.75 | 0.75 |
 | Random Forest Classifier | 0.83 | 0.82 | 0.83 | 0.82 |
 | MLP Classifier | 0.80 | 0.80 | 0.80 | 0.80 |
+
+### Classification Model Evaluation
+As seen in above table, Logistic Regression has the lowest values for all metrics <br>
+This means that while the model can classify the data to the correct class using a linear relationship, there is a 24% chance that the data could be incorrectly classified <br>
+Random Forest Classifier performed the best among the three models <br>
+It means that the processed data have a complex and non-linear relationship with the target <br>
+These metric values could be further improved if the data was processed better during the EDA and feature engineering stages <br>
+As for the MLP Classifier, its performance is similar to that of Random Forest Classifier but the shortfall could be due to the range of hyperparameters defined <br>
+The number of hidden layers and neurons defined in the list could be increased to allow GridSearchCV to output a better combination
 
 ## Other Considerations
 - Regression:
