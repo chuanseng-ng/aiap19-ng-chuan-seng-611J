@@ -6,6 +6,7 @@ from copy import deepcopy
 import EDA.eda_addon as eda_addon
 
 
+# Machine learning EDA wrapper
 def ml_eda_step(
     farm_data_df: pd.DataFrame,
     part1_target_col: str,
@@ -92,6 +93,7 @@ def ml_eda_step(
     )
 
 
+# Part 1 (Regression) EDA wrapper
 def part1_eda(
     data_df,
     target_col,
@@ -130,6 +132,7 @@ def part1_eda(
     return feat_farm_data_df, X_train, X_test, Y_train, Y_test
 
 
+# Part 2 (Classification) EDA wrapper
 def part2_eda(
     data_df: pd.DataFrame,
     target_col: str,

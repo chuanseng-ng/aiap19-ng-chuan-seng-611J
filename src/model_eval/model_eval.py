@@ -15,6 +15,7 @@ from sklearn.metrics import (
 from typing import Dict
 
 
+# Evaluate selected models with their best set of parameters via defined metrics
 def model_evaluation(
     X_test: pd.DataFrame,
     Y_test: pd.DataFrame,

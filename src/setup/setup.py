@@ -1,6 +1,7 @@
 import yaml
 
 
+# Get all user-configs from config.yaml and load them into variables for use in latter steps
 def setup_stage():
     # Load configuration file
     with open("cfg/config.yaml", "r") as f:
