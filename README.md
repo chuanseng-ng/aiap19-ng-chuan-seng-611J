@@ -29,7 +29,8 @@ root
 |   |   ├── __init__.py
 |   |   ├── duration_cal.py
 |   |   └── setup.py
-├── main.py
+|   ├── main.py
+|   └── ml_model.log
 ├── .gitignore
 ├── eda.ipynb
 ├── LICENSE
@@ -52,6 +53,8 @@ root
     - Split data into training and testing data sets for subsequent steps
 4. Perform selected model setup for both part 1 and part 2, and run through defined parameters to get best combination
 5. Evaluate model performance by monitoring the metrics from predicting the test set
+6. The model details can be analyzed in ml_model.log after the run
+    - Contains model runtime, best model parameter combination and model metrics
 
 ### Visualization
 ```mermaid
