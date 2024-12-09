@@ -161,21 +161,61 @@ flowchart TD
         - Combines multiple decision trees to capture complex, non-linear relationship in the data
         - Robustness to overfitting
         - Handles numerical and categorical features well without needing for extensive preprocessing
-    - XGBoost Classifier
-        - High predictive power - XGBoost is an advanced gradient boosting algorithm
-        - Optimized for speed and efficiency - Can handle missing data, categorical variables, and outliers
-        - Built-in regularization to prevent overfitting when dealing with noisy or complex datasets
-        - Wide range of hyper-parameters to tune - Allowing for further performance optimization
+    - MLP (Multi-Layer Perceptron) Classifier
+        - Can learn complex non-linear relationships between features and target
+        - Flexible model that can be adapted to different types of classification problems (Binary or multi-class)
+        - Can be configured with various numbers of hidden layers and neurons
 
 ## Model Evaluation
 - Regression
-    - Linear Regression
-    - Random Forest Regressor
-    - XGBoost Regressor
+    - Metrics used
+        - Mean Squared Error
+            - Used when minimizing prediction error is of importance
+            - Provides indication of how well model is fitting to data
+            - More sensitive to outliers and gives a sense of error magnitude
+            - Lower value = Better model predictive accuracy
+        - R2 Score
+            - Used to understand how well model is explaining variance in data (Variance = Variability/spread of target variable)
+            - Determine how well model captures underlying patterns in data
+            - Might not be accurate if model is overfitting or contains outliers
+            - Higher value = Higher percentage of variance is explained by model
+    - Since this regression is to predict the temperature value, prediction error is of importance
+    - Hence, mean squared error needs to be monitored, along with r2 score to ensure that the model is not overfitted
+
+### Regression Model Results
+| Model | Mean Squared Error | R2 Score |
+| :---: | :----------------: | :------: |
+| Linear Regression | 0.5126 | 0.4975 |
+| Random Forest Regressor | 0.3154 | 0.6908 |
+| XGBoost Regressor | 0.3381 | 0.6686 |
+---
+<br>
+
 - Classification
-    - Logistic Regression
-    - Random Forest Classifier
-    - XGBoost Classifier
+    - Metrics used
+        - Confusion Matrix
+            - Helps to visualize performance of model by showing number of correct and incorrect predictions for each class
+            - Helps to identify errors (false positives and false negatives) and assess how well model is performing
+        - Classification Report
+            - Provides detailed performance evaluation of model by calculating precision, recall, f1-score, and support for each class
+            - Useful in situations where there are imabalanced classes or need to evaluate model's behaviour for each class
+    - The confusion matrix provides a quick overview of the model's classification results
+    - The classification report provides an overview of the performance of each target class
+
+### Classification Sub-metric Description
+| Metric | Description |
+| :----: | :---------: |
+| Precision | Proportion of instances predicted as particular class actually belongs to said class |
+| Recall | Proportion of actual instances of a class are correctly identified by model |
+| F1-Score | Harmonic mean of precision and recall |
+| Support | Number of occurences of each class in dataset |
+
+### Classification Model Results
+| Model | Accuracy | Precision (Avg) | Recall (Avg) | F1-Score (Avg) |
+| :---: | :------: | :-------: | :----: | :------: |
+| Logistic Regression | 0.76 | 0.75 | 0.75 | 0.75 |
+| Random Forest Classifier | 0.83 | 0.82 | 0.83 | 0.82 |
+| MLP Classifier | 0.80 | 0.80 | 0.80 | 0.80 |
 
 ## Other Considerations
 - Regression:
