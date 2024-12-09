@@ -36,9 +36,9 @@ model:
     model_name_list:                  # Supported regression model list
       - "Linear Regression"           # Simple and fast (Limited to linear relationships)
       - "Random Forest"               # Suitable for complex, non-linear data (Computational expensive)
-      - "SVR"                         # Effective at capturing non-linear relationships (Sensitive to hyperparameters and is slow)
-      - "MLP"                         # Powerful for complex non-linear data (Requires large data, is slow and is prone to overfitting)
-      - "Bayesian Ridge"              # Useful when need probabilistic view of models' uncertainity (Assumes linearity and is slower than linear regression)
+      #- "SVR"                         # Effective at capturing non-linear relationships (Sensitive to hyperparameters and is slow)
+      #- "MLP"                         # Powerful for complex non-linear data (Requires large data, is slow and is prone to overfitting)
+      #- "Bayesian Ridge"              # Useful when need probabilistic view of models' uncertainity (Assumes linearity and is slower than linear regression)
       - "XGBoost"                     # High performance model that can perform self-regularization and is fast (Requires careful tuning)
     save_model: True                  # Model save function (True/False)
   part2:
@@ -47,10 +47,10 @@ model:
     model_name_list:                  # Supported classification model list
       - "Logistic Regression"         # Ideal for simple binary classification problem with linearly separable data (Cannot handle non-linearity)
       - "Random Forest"               # Can model non-linear relationship (Computationally expensive)
-      - "SVC"                         # Suitable for high-dimensional spaces with clear margin between classes (Sensitive to tuning and slow for large datasets)
+      #- "SVC"                         # Suitable for high-dimensional spaces with clear margin between classes (Sensitive to tuning and slow for large datasets)
       - "MLP"                         # Highly flexible and powerful for non-linear tasks (Requires large data and is prone to overfitting)
-      - "Naive Bayes"                 # Fast and simple, and ideal for text classification tasks (Assumes feature are independent of each other and less flexible)
-      - "XGBoost"                     # High accuracy model that can perform self-regularization (Requires careful tuning)
+      #- "Naive Bayes"                 # Fast and simple, and ideal for text classification tasks (Assumes feature are independent of each other and less flexible)
+      #- "XGBoost"                     # High accuracy model that can perform self-regularization (Requires careful tuning)
     save_model: False                 # Model save function (True/False)
 
 part1:
