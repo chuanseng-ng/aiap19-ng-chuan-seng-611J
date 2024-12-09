@@ -8,35 +8,35 @@ Repository for AIAP December 2024 technical assessment attempt
 ## Folder Structure Overview
 ```md
 root
-├── .github
+├── .github                  # Github actions
 ├── src
 |   ├── cfg
-|   |   └── config.yaml
+|   |   └── config.yaml      # User-config parameter
 |   ├── EDA
 |   |   ├── __init__.py
-|   |   ├── eda_addon.py
-|   |   └── eda_step.py
+|   |   ├── eda_addon.py     # EDA addon - Feature engineering/Correlation evalution/Model preparation
+|   |   └── eda_step.py      # EDA top wrapper
 |   ├── log
 |   |   ├── __init__.py
-|   |   └── log_setup.py
+|   |   └── log_setup.py     # Runtime logger setup
 |   ├── model_eval
 |   |   ├── __init__.py
-|   |   └── model_eval.py
+|   |   └── model_eval.py    # Model performance evaluation
 |   ├── model_select
 |   |   ├── __init__.py
-|   |   └── model_select.py
+|   |   └── model_select.py  # Model selection setup
 |   ├── setup
 |   |   ├── __init__.py
-|   |   ├── duration_cal.py
-|   |   └── setup.py
-|   ├── main.py
-|   └── ml_model.log
+|   |   ├── duration_cal.py  # Runtime calculation
+|   |   └── setup.py         # User-config parameter setup
+|   ├── main.py              # Top wrapper
+|   └── ml_model.log         # Run log (Only available after first run)
 ├── .gitignore
-├── eda.ipynb
+├── eda.ipynb                # Part 1 EDA Jupyter notebook
 ├── LICENSE
-├── README.md
-├── requirements.txt
-└── run.sh
+├── README.md                # Current file
+├── requirements.txt         # Virtual environment library setup
+└── run.sh                   # Trigger file
 ```
 
 ## Pipeline Instructions
