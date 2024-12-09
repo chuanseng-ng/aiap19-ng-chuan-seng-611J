@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 
+# Feature engineering step
 def feat_eng(data_df: pd.DataFrame, full_col_list: List, lab_enc_list=[]):
     # Perform label encoding
     lab_enc = LabelEncoder()
@@ -29,6 +30,7 @@ def feat_eng(data_df: pd.DataFrame, full_col_list: List, lab_enc_list=[]):
     return data_df
 
 
+# Feature correlation analysis and evaluation
 def corr_eval(data_df: pd.DataFrame, target_col: str, corr_thresh: float):
     # Calculate correlation matrix
     corr_matrix = data_df.corr()
@@ -46,6 +48,7 @@ def corr_eval(data_df: pd.DataFrame, target_col: str, corr_thresh: float):
     return data_df
 
 
+# Machine learning model data preparatory step
 def model_prep(
     data_df: pd.DataFrame,
     target_col: str,

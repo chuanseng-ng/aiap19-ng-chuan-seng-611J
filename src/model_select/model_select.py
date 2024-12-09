@@ -16,6 +16,7 @@ from sklearn.naive_bayes import BernoulliNB
 from typing import Dict
 
 
+# Setup selected models and their parameters and run through pre-defined parameters to determine best set
 def model_selection(
     X_train: pd.DataFrame,
     Y_train: pd.DataFrame,
@@ -95,6 +96,7 @@ def model_selection(
     return best_estimators_dict
 
 
+# Pre-set regression model and parameters if defined
 def regression_model_param_det(model_param_dict, model_dict, model_random_state):
     if "Linear Regression" in model_param_dict:
         model_dict["Linear Regression"] = {
@@ -129,6 +131,7 @@ def regression_model_param_det(model_param_dict, model_dict, model_random_state)
     return model_dict
 
 
+# Pre-set classification model and parameters if defined
 def classification_model_param_det(model_param_dict, model_dict, model_random_state):
     if "Logistic Regression" in model_param_dict:
         model_dict["Logistic Regression"] = {

@@ -122,6 +122,7 @@ print("Training done!")
 
 part4_time, step_cnt = duration_cal.duration_print(part3_time, step_cnt)
 
+# Evaluate performance of selected models and provide metric results
 print("{step_cnt}. Evaluating machine learning model....")
 print("Starting with part 1 - Regression...")
 model_eval.model_evaluation(
